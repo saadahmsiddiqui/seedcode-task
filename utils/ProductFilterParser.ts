@@ -11,13 +11,16 @@ export function ProductFilterParser(filters: any, operator: string) {
         switch(typeof(filters[key])) {
             case 'string':
                 switch(key) {
+                    case 'Categories':
+                        find['Categories'] = { $in: [ filters[key] ]}
+                        break;
                     case 'Color':
                         if (!Array.isArray(filters[key])) filters[key] = [filters[key]]
-                        find['Color'] = { $in: filters[key] };
+                        find['Color'] = filters[key]
                         break;                        
                     case 'Brand':
                         if (!Array.isArray(filters[key])) filters[key] = [filters[key]]
-                        find['Brand'] = { $in: filters[key] };
+                        find['Brand'] = filters[key]
                         break;
                     case 'Price':
                         const c1 = ParseRangeString(filters[key])
@@ -65,6 +68,7 @@ export function ProductFilterParser(filters: any, operator: string) {
                         }
                         break;
                 }
+                break;
             case 'object':
                 if (Array.isArray(filters[key])) {
                     switch(key) {

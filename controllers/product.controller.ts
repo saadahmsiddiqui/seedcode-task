@@ -17,6 +17,7 @@ router.get('/GetAllProducts', async (req, res) => {
         if (req.body.Sort) { if (!isValidSortQuery(req.body.Sort, allowedKeys)) { throw new Error('Invalid Request') } else { sort = req.body.Sort } }
         if (req.body.Filters && !req.body.OP) {throw new Error('Invalid Request');}
         if (req.body.Filters && req.body.OP) { find = ProductFilterParser(req.body.Filters, req.body.OP); if(find === null) { throw new Error('Invalid Request'); } }
+
         const result = await proModel.find(find, select, sort, page, limit);
         res.status(200).json({ status: 'success', data: result });
     } catch (err) {

@@ -69,26 +69,42 @@ export function ProductFilterParser(filters: any, operator: string) {
                 if (Array.isArray(filters[key])) {
                     switch(key) {
                         case 'Categories':
-                            find['Categories'] = { $in: filters[key].map((i: string) => new ObjectId(i)) }
+                            try {
+                                find['Categories'] = { $in: filters[key].map((i: string) => new ObjectId(i)) }
+                            } catch (err) {
+                                console.log(err);
+                                return null;
+                            }
                             break;
                         case 'Color':
-                            if (!Array.isArray(filters[key])) filters[key] = [filters[key]]
+                            // if (!Array.isArray(filters[key])) filters[key] = [filters[key]]
                             find['Color'] = { $in: filters[key] };
                             break;                        
                         case 'Brand':
-                            if (!Array.isArray(filters[key])) filters[key] = [filters[key]]
+                            // if (!Array.isArray(filters[key])) filters[key] = [filters[key]]
                             find['Brand'] = { $in: filters[key] };
                             break;
                     }
                 } else {
                     switch(key) {
                         case 'Categories':
-                            if (filters[key].in && Array.isArray(filters[key].in)) { filters[key].in = filters[key].in.map((i: string) => new ObjectId(i)) }
-                            if (filters[key].ex && Array.isArray(filters[key].ex)) {filters[key].ex = filters[key].ex.map((i: string) => new ObjectId(i))}
-                            const arrCt = MultipleValueFilterParser(filters[key], 'Categories');
-                            if (arrCt != null) {
-                                Object.assign(find, arrCt)
-                            } else {
+                            try {
+                                if (filters[key].in && Array.isArray(filters[key].in)) { filters[key].in = filters[key].in.map((i: string) => new ObjectId(i)) }
+                                if (filters[key].ex && Array.isArray(filters[key].ex)) {filters[key].ex = filters[key].ex.map((i: string) => new ObjectId(i))}
+                                const arrCt = MultipleValueFilterParser(filters[key], 'Categories');
+                                if (arrCt != null) {
+                                    if (arrCt[operator] && find[operator]) {
+                                        find[operator] = find[operator].concat(arrCt[operator])
+                                    } else if (arrCt[operator] && !find[operator]) {
+                                        find[operator] = arrCt[operator];
+                                    } else {
+                                        Object.assign(find, arrCt)
+                                    }
+                                } else {
+                                    return null;
+                                }
+                            } catch (err) {
+                                console.log(err);
                                 return null;
                             }
                             break;
@@ -126,7 +142,17 @@ export function ProductFilterParser(filters: any, operator: string) {
                         case 'Color':
                             const arrC = MultipleValueFilterParser(filters[key], 'Color');
                             if (arrC != null) {
-                                Object.assign(find, arrC)
+                                if (arrC != null) {
+                                    if (arrC[operator] && find[operator]) {
+                                        find[operator] = find[operator].concat(arrC[operator])
+                                    } else if (arrC[operator] && !find[operator]) {
+                                        find[operator] = arrC[operator];
+                                    } else {
+                                        Object.assign(find, arrC)
+                                    }
+                                } else {
+                                    return null;
+                                }
                             } else {
                                 return null;
                             }
@@ -134,7 +160,13 @@ export function ProductFilterParser(filters: any, operator: string) {
                         case 'Brand':
                             const arr = MultipleValueFilterParser(filters[key], 'Brand');
                             if (arr != null) {
-                                Object.assign(find, arr)
+                                if (arr[operator] && find[operator]) {
+                                    find[operator] = find[operator].concat(arr[operator])
+                                } else if (arr[operator] && !find[operator]) {
+                                    find[operator] = arr[operator];
+                                } else {
+                                    Object.assign(find, arr)
+                                }
                             } else {
                                 return null;
                             }

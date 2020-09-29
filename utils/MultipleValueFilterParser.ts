@@ -3,7 +3,7 @@ import { MultipleValueFilter } from "../interfaces/IFilter";
 export function MultipleValueFilterParser(filterValue: MultipleValueFilter, keyName: string) {
     if (!filterValue.in && !filterValue.ex) return null;
     if (!filterValue.in || !filterValue.ex) {
-        return filterValue.in ? { [keyName]: { $in: filterValue.in } } : { [keyName]: { $in: filterValue.ex } }
+        return filterValue.in ? { [keyName]: { $in: filterValue.in } } : { [keyName]: { $nin: filterValue.ex } }
     } else {
         let exists = false;
         filterValue.in.filter((i: string) => {

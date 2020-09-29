@@ -14,7 +14,7 @@ export function MultipleValueFilterParser(filterValue: MultipleValueFilter, keyN
             return i;
         })
         if (exists) return null;
-        return { $and: [ { [keyName]: { $nin: filterValue.ex } }, { [keyName]: { $in: filterValue.in } } ] }
+        return { [joinOperator]: [ { [keyName]: { $nin: filterValue.ex } }, { [keyName]: { $in: filterValue.in } } ] }
 //         return { [keyName]: { $in: filterValue.in, $nin: filterValue.ex } }
     }
 }

@@ -12,7 +12,12 @@ export function ProductFilterParser(filters: any, operator: string) {
             case 'string':
                 switch(key) {
                     case 'Categories':
-                        find['Categories'] = { $in: [ filters[key] ]}
+                        try {
+                            const oId = new ObjectId(filters[key])
+                            find['Categories'] = { $in: [ oId ]}
+                        } catch (err) {
+                            return null;
+                        }
                         break;
                     case 'Color':
                         if (!Array.isArray(filters[key])) filters[key] = [filters[key]]

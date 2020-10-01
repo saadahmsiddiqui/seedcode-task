@@ -11,7 +11,7 @@ router.get('/GetAllCategories', async (req, res) => {
         let page = 0, limit = 20, select = {};
 
         if (req.query.page) { page = (parseInt(req.query.page as any)) }
-        if (req.body.Select) { if (!isValidProjection(req.body.select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.Select } }
+        if (req.body.Select) { if (!isValidProjection(req.body.Select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.Select } }
         if (page > 0) page = (page - 1) * limit;
 
         const result = await catModel.find({}, select, req.body.sort, page, limit);

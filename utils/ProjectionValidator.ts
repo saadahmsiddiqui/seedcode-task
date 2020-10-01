@@ -10,6 +10,8 @@ export function isValidProjection(object: any, allowedKeys: string[]) {
                 case 0:
                     zC+=1;
                     break;
+                default:
+                    return false;
             }
         }
     }

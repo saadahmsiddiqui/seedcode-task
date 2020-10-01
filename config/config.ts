@@ -7,6 +7,7 @@ switch(process.env.NODE_ENV) {
             DBUrl: 'mongodb://localhost:27017/',
             DBName: 'seedcodeDB'
         }
+        break;
     default:
         conf = {
             PORT: 9800,

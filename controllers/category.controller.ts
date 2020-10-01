@@ -54,7 +54,7 @@ router.post('/Category', async (req, res) => {
 router.put('/Category/:CategoryId', async (req, res) => {
     try {
         const oId = new ObjectId(req.params.CategoryId)
-        if (oId && req.body.Category && req.body.Category.Name && req.body.Category.Image && req.body.Category._id) {
+        if (oId && req.body.Category && req.body.Category.Name && req.body.Category.Image && !req.body.Category._id) {
             const result = await catModel.updateOne({ _id: oId }, req.body.Category);
             res.status(200).json({ status: 'success', data: result, message: 'Category Updated.' });
         } else {

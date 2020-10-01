@@ -25,7 +25,7 @@ router.get('/Category/:CategoryId', async (req, res) => {
     try {
         let catId = null, select = {};
         catId = new ObjectId(req.params.CategoryId);
-        if (req.body.select) { if (!isValidProjection(req.body.select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.select } }
+        if (req.body.Select) { if (!isValidProjection(req.body.Select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.Select } }
         if (catId) {
             const result = await catModel.findOne({ _id: catId }, req.body.select);
             res.status(200).json({ status: 'success', data: result });

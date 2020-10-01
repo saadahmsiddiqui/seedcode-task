@@ -1,6 +1,7 @@
 import express from 'express';
 import { ObjectId } from 'mongodb';
 import { catModel } from '../index';
+import { isValidSortQuery } from '../utils/DocumentSortValidator';
 import { isValidProjection } from '../utils/ProjectionValidator';
 const router = express.Router();
 
@@ -8,13 +9,14 @@ const allowedProjectionKeys = ['Image', 'Name'];
 
 router.get('/GetAllCategories', async (req, res) => {
     try {
-        let page = 0, limit = 20, select = {};
+        let page = 0, limit = 20, select = {}, sort = {};
 
         if (req.query.page) { page = (parseInt(req.query.page as any)) }
         if (req.body.Select) { if (!isValidProjection(req.body.Select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.Select } }
+        if (req.body.Sort) { if (!isValidSortQuery(req.body.Sort, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { sort = req.body.Sort } }
         if (page > 0) page = (page - 1) * limit;
 
-        const result = await catModel.find({}, select, req.body.sort, page, limit);
+        const result = await catModel.find({}, select, sort, page, limit);
         res.status(200).json({ status: 'success', data: result });
     } catch (err) {
         res.status(400).json({ status: 'error', message: err.message ? err.message : 'Something went wrong.' });

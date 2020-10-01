@@ -37,7 +37,7 @@ export class SeedcodeService {
         SeedcodeService.registerMiddleware();
         SeedcodeService.registerRoutes();
         SeedcodeService.server.listen(Config.PORT, () => {
-            console.log('[Seedcode Service] Listening');
+            console.log('[Seedcode Service] Listening on port: '+ Config.PORT);
         })
     }
 }

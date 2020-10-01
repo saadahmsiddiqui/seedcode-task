@@ -11,7 +11,7 @@ router.get('/GetAllCategories', async (req, res) => {
         let page = 0, limit = 20, select = {};
 
         if (req.query.page) { page = (parseInt(req.query.page as any)) }
-        if (req.body.select) { if (!isValidProjection(req.body.select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.select } }
+        if (req.body.Select) { if (!isValidProjection(req.body.select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.Select } }
         if (page > 0) page = (page - 1) * limit;
 
         const result = await catModel.find({}, select, req.body.sort, page, limit);
@@ -54,7 +54,7 @@ router.post('/Category', async (req, res) => {
 router.put('/Category/:CategoryId', async (req, res) => {
     try {
         const oId = new ObjectId(req.params.CategoryId)
-        if (oId && req.body.Category && req.body.Category.Name && req.body.Category.Image) {
+        if (oId && req.body.Category && req.body.Category.Name && req.body.Category.Image && req.body.Category._id) {
             const result = await catModel.updateOne({ _id: oId }, req.body.Category);
             res.status(200).json({ status: 'success', data: result, message: 'Category Updated.' });
         } else {

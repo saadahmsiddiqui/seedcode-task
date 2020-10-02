@@ -95,11 +95,18 @@ router.get('/GetProductsByCategory/:CategoryId', async (req, res) => {
         if (req.body.Sort) { if (!isValidSortQuery(req.body.Sort, allowedKeys)) { throw new Error('Invalid Request') } else { sort = req.body.Sort } }
         if (req.body.Filters && !req.body.OP) {throw new Error('Invalid Request');}
         if (req.body.Filters && req.body.OP) { find = ProductFilterParser(req.body.Filters, req.body.OP); if(find === null) { throw new Error('Invalid Request'); } }
-        if (find.Categories) {
-            find.Categories = { $in: [new ObjectId(req.params.CategoryId)] }
+        let operator = (req.body.OP === 'and') ? '$and' : '$or';
+        if (find[operator]) {
+            find[operator] = find[operator].filter((i: any) => {
+                if (i['Categories'] && i['Categories']['$nin'] && i['Categories']['$nin'].some((catIds: ObjectId) => catIds.toString() === req.params.CategoryId)) {
+                    return false;
+                }
+                return true;
+            })
         }
 
-        const result = await proModel.find(find, select, sort, page, limit);
+        find.Categories = { $in: [new ObjectId(req.params.CategoryId)] }
+        let result = await proModel.find(find, select, sort, page, limit);
         res.status(200).json({ status: 'success', data: result });
     } catch (err) {
         res.status(400).json({ status: 'error', message: err.message ? err.message : 'Something went wrong.' });

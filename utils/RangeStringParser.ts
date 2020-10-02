@@ -9,7 +9,7 @@ export function ParseRangeString(rangeString: string) {
     /**
      * Only a number
      */
-    if (!rangeString.includes('>') && !rangeString.includes('<') && !rangeString.includes('=') && !rangeString.includes('-')) { return { $eq: parseInt(rangeString) } }
+    if (!rangeString.includes('!') && !rangeString.includes('>') && !rangeString.includes('<') && !rangeString.includes('=') && !rangeString.includes('-')) { return { $eq: parseInt(rangeString) } }
     /**
      * != Condition
      */

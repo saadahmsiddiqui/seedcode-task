@@ -182,6 +182,7 @@ export function ProductFilterParser(filters: any, operator: string) {
                             break;
                     }
                 }
+                break;
         }
     }
     if (find[operator].length === 0) { delete(find[operator]) }

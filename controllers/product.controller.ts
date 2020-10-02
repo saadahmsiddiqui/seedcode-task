@@ -104,8 +104,21 @@ router.get('/GetProductsByCategory/:CategoryId', async (req, res) => {
                 return true;
             })
         }
+        if (find.Categories && find.Categories['$nin']) {
+            find.Categories['$nin'] = find.Categories['$nin'].filter((catIds: ObjectId) => {
+                if (catIds.toString() === req.params.CategoryId) {
+                    return false;
+                }
+                return true;
+            })
+        } else if (find.Categories && find.Categories['$in']) {
+            if (!find.Categories['$in'].some((catIds: ObjectId) => catIds.toString() === req.params.CategoryId)) {
+                find.Categories['$in'].push(new ObjectId(req.params.CategoryId))
+            }
+        } else {
+            find.Categories = { $in: [new ObjectId(req.params.CategoryId)] }
+        }
 
-        find.Categories = { $in: [new ObjectId(req.params.CategoryId)] }
         let result = await proModel.find(find, select, sort, page, limit);
         res.status(200).json({ status: 'success', data: result });
     } catch (err) {

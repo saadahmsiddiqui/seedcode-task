@@ -128,7 +128,7 @@
 ### Get Product
 `GET /Product/:ProductId`
 
-    http://54.198.116.182:80/GetAllProducts/
+    http://54.198.116.182:80/Product/
 
 ### URL Params
     ProductId: string

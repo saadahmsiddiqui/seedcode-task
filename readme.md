@@ -421,3 +421,104 @@
     "message": "\"Poo\" is not allowed"
 }
 ```
+
+
+### Get Products By Category
+`PUT /Product`
+
+    http://54.198.116.182:80/GetProductsByCategory/:CategoryId
+  
+### URL Param
+
+    CategoryId: string
+
+### Body Param
+```json
+{
+    "Filters": {
+        "Price": "5000-10000",
+        "DiscountRate": "4",
+        "Rating": ">5",
+        "Categories": "5f6faf273a0c8037acd57ea2 (or)",
+        "Categories": ["5f6faf273a0c8037acd57ea2 (or)"],
+        "Categories": {
+            "in": ["5f6faf273a0c8037acd57ea2"],
+            "ex": ["5f6faf273a0c8037acd57ea3"]
+        },
+        "Brand": "Reynolds - Wyman (or)",
+        "Brand": ["Reynolds - Wyman (or)"],
+        "Brand": {
+            "in": ["Reynolds - Wyman"],
+            "ex": ["Keeling LLC"]
+        },
+        "ProductSpecificFields": {
+            "key": "value"
+        }
+    },
+    "OP": "and/or (only with filters)",
+    "Select": {
+        "_id": 0,
+        "Name": 1,
+        "Price": 1
+    },
+    "Sort": {
+        "Name": "'1' or '-1'"
+    }
+}
+```
+### Response
+    HTTP/1.1 200 OK
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 10761
+    ETag: W/"2a09-5296Q1dFtAFWGw3jbfXYeb/ICn8"
+    Date: Fri, 02 Oct 2020 04:02:06 GMT
+    Connection: keep-alive
+```json
+{
+    "status": "success",
+    "data": [
+        {
+            "_id": "5f6f5d8a788b3b2ee8fc405c",
+            "Name": "Sleek Soft Sausages",
+            "Description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+            "Price": 76453,
+            "Rating": 8,
+            "DiscountRate": 2,
+            "Categories": [
+                "5f6f5d8a788b3b2ee8fc404f",
+                "5f6f5d8a788b3b2ee8fc4050",
+                "5f6f5d8a788b3b2ee8fc4051"
+            ],
+            "ProductSpecificFields": {
+                "Gorgeous": "Rubber",
+                "Refined": "Metal",
+                "Handmade": 10813,
+                "Fantastic": "Wooden"
+            },
+            "Images": [
+                "http://placeimg.com/640/480/cats",
+                "http://placeimg.com/640/480/cats",
+                "http://placeimg.com/640/480/cats",
+                "http://placeimg.com/640/480/cats"
+            ],
+            "Color": "salmon",
+            "Brand": "Moen and Sons"
+        }
+    ]
+}
+```
+    HTTP/1.1 400 Bad Request
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 46
+    ETag: W/"2e-3y83xE2EWF9UGerdS3qJn30c55g"
+    Date: Fri, 02 Oct 2020 04:08:26 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "error",
+    "message": "Invalid Request"
+}
+```

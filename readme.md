@@ -5,10 +5,10 @@
     tsc
 
     Use seeder with 4 process arguments
-    - CategoryCount=10 (for adding 10 Categories)
-    - ProductCount=10 (for adding 10 Products)
-    - InsertCat=true or false (to insert categories or not)
-    - InsertProduct=true or false (to insert products or not)
+        * CategoryCount=10 (for adding 10 Categories)
+        * ProductCount=10 (for adding 10 Products)
+        * InsertCat=true or false (to insert categories or not)
+        * InsertProduct=true or false (to insert products or not)
 
 ## To run the Application
     npm run dev or node build/index.js

@@ -522,3 +522,89 @@
     "message": "Invalid Request"
 }
 ```
+
+### Get All Categories
+`PUT /Product`
+    http://54.198.116.182:80/GetAllCategories?page=1
+  
+### Query Param
+    page: number
+
+### Response
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 1335
+    ETag: W/"537-NFb6JsTNOKeWiB+onZz9HoyQ14I"
+    Date: Sun, 04 Oct 2020 15:07:58 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "success",
+    "data": [
+        {
+            "_id": "5f6faf273a0c8037acd57e9e",
+            "Name": "wqvizhdzyg",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/geran7/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57e9f",
+            "Name": "ysyfyboxqo",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/sunshinedgirl/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea0",
+            "Name": "etjdlnxqdo",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/webtanya/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea1",
+            "Name": "toyadgstzy",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/scottiedude/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea2",
+            "Name": "elxoeqbbqu",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/melvindidit/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea3",
+            "Name": "jsprxhrzhj",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/raquelwilson/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea4",
+            "Name": "etihchvwgi",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/calebjoyce/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea5",
+            "Name": "nydhhdovkq",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/slowspock/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea6",
+            "Name": "ukruqarwem",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/m_kalibry/128.jpg"
+        },
+        {
+            "_id": "5f6faf273a0c8037acd57ea7",
+            "Name": "fihnrxtyak",
+            "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/jitachi/128.jpg"
+        }
+    ]
+}
+```
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 47
+    ETag: W/"2f-UbUjUqv6XE9S10MtmwLzFJrpi9o"
+    Date: Sun, 04 Oct 2020 15:15:40 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "error",
+    "message": "Invalid Request."
+}
+```

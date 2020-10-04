@@ -11,7 +11,7 @@ router.get('/GetAllCategories', async (req, res) => {
     try {
         let page = 0, limit = 20, select = {}, sort = {};
 
-        if (req.query.page) { page = (parseInt(req.query.page as any)) }
+        if (req.query.page) { page = (parseInt(req.query.page as any)); if (isNaN(page)) { throw new Error("Invalid Request.");}  }
         if (req.body.Select) { if (!isValidProjection(req.body.Select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.Select } }
         if (req.body.Sort) { if (!isValidSortQuery(req.body.Sort, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { sort = req.body.Sort } }
         if (page > 0) page = (page - 1) * limit;

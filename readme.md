@@ -608,3 +608,130 @@
     "message": "Invalid Request."
 }
 ```
+
+### Get Category
+`GET /Category/:CategoryId`
+    http://54.198.116.182:80/Category/5f6f5d8a788b3b2ee8fc404e
+  
+### URL Param
+    CategoryId: string
+
+### Response
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 1335
+    ETag: W/"537-NFb6JsTNOKeWiB+onZz9HoyQ14I"
+    Date: Sun, 04 Oct 2020 15:07:58 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "success",
+    "data": {
+        "_id": "5f6f5d8a788b3b2ee8fc404e",
+        "Name": "lfomuymcrv",
+        "Image": "https://s3.amazonaws.com/uifaces/faces/twitter/ddggccaa/128.jpg"
+    }
+}
+```
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 47
+    ETag: W/"2f-UbUjUqv6XE9S10MtmwLzFJrpi9o"
+    Date: Sun, 04 Oct 2020 15:15:40 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "error",
+    "message": "Invalid Request."
+}
+```
+
+### Add Category
+`POST /Category/:CategoryId`
+    http://54.198.116.182:80/Category
+  
+### URL Param
+    CategoryId: string
+
+### Body Param
+```json
+{
+  "Category": {
+    "Name": "Hello World"
+  }
+}
+```
+
+### Response
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 1335
+    ETag: W/"537-NFb6JsTNOKeWiB+onZz9HoyQ14I"
+    Date: Sun, 04 Oct 2020 15:07:58 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "success",
+    "data": "5f79e8f3ff8ab63338ac208e"
+}
+```
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 47
+    ETag: W/"2f-UbUjUqv6XE9S10MtmwLzFJrpi9o"
+    Date: Sun, 04 Oct 2020 15:15:40 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "error",
+    "error": "Invalid Request."
+}
+```
+
+### Update Category
+`PUT /Category/:CategoryId`
+    http://54.198.116.182:80/Category/5f79e8f3ff8ab63338ac208e
+  
+### URL Param
+    CategoryId: string
+
+### Body Param
+```json
+{
+  "Category": {
+    "Name": "Hello World"
+  }
+}
+```
+### Response
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 1335
+    ETag: W/"537-NFb6JsTNOKeWiB+onZz9HoyQ14I"
+    Date: Sun, 04 Oct 2020 15:07:58 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "success",
+    "data": 1,
+    "message": "Category Updated."
+}
+```
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: 47
+    ETag: W/"2f-UbUjUqv6XE9S10MtmwLzFJrpi9o"
+    Date: Sun, 04 Oct 2020 15:15:40 GMT
+    Connection: keep-alive
+
+```json
+{
+    "status": "error",
+    "error": "Invalid Request."
+}
+```

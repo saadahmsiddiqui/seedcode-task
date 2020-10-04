@@ -29,10 +29,10 @@ router.get('/Category/:CategoryId', async (req, res) => {
         catId = new ObjectId(req.params.CategoryId);
         if (req.body.Select) { if (!isValidProjection(req.body.Select, allowedProjectionKeys)) { throw new Error('Invalid Request') } else { select = req.body.Select } }
         if (catId) {
-            const result = await catModel.findOne({ _id: catId }, req.body.select);
+            const result = await catModel.findOne({ _id: catId }, select);
             res.status(200).json({ status: 'success', data: result });
         } else {
-            res.status(500).json({ status: 'error', error: 'Invalid Id.' });
+            res.status(400).json({ status: 'error', error: 'Invalid Id.' });
         }
     } catch (err) {
         res.status(500).json({ status: 'error', error: err.message ? err.message : 'Something went wrong.' });
@@ -56,8 +56,8 @@ router.post('/Category', async (req, res) => {
 router.put('/Category/:CategoryId', async (req, res) => {
     try {
         const oId = new ObjectId(req.params.CategoryId)
-        if (oId && req.body.Category && req.body.Category.Name && req.body.Category.Image && !req.body.Category._id) {
-            const result = await catModel.updateOne({ _id: oId }, req.body.Category);
+        if (oId && req.body.Category && (req.body.Category.Name || req.body.Category.Image) && !req.body.Category._id) {
+            const result = await catModel.updateOne({ _id: oId }, { $set: req.body.Category });
             res.status(200).json({ status: 'success', data: result, message: 'Category Updated.' });
         } else {
             res.status(500).json({ status: 'error', error: 'Invalid Request.' });

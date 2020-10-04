@@ -77,7 +77,9 @@ router.put('/Product/:ProductId', async (req, res) => {
         if (error) {
             res.status(400).json({ status: 'error', message: error.message });
         } else {
-            Product.Categories = Product.Categories.map((i: string) => new ObjectId(i))
+            if (Product.Categories) {
+                Product.Categories = Product.Categories.map((i: string) => new ObjectId(i))
+            }
             await proModel.updateOne({ _id: Id }, { $set: Product });
             res.status(200).json({ status: 'success', message: 'Product Updated.' })
         }

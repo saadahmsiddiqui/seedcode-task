@@ -7,7 +7,7 @@ export const postProduct = joi.object({
     Rating: joi.number().required(),
     DiscountRate: joi.number().required(),
     Categories: joi.array().items(joi.string()).required(),
-    ProductSpecificFields: joi.object({}),
+    ProductSpecificFields: joi.any(),
     Images: joi.array().items(joi.string()).required(),
     Color: joi.string().min(3).max(100).normalize().required(),
     Brand: joi.string().min(3).max(100).normalize().required()
@@ -20,7 +20,7 @@ export const updateProduct = joi.object({
     Rating: joi.number(),
     DiscountRate: joi.number(),
     Categories: joi.array().items(joi.string()),
-    ProductSpecificFields: joi.object({}),
+    ProductSpecificFields: joi.any(),
     Images: joi.array().items(joi.string()),
     Color: joi.string().min(3).max(100).normalize(),
     Brand: joi.string().min(3).max(100).normalize()
